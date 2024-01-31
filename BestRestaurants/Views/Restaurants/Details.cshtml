@@ -1,0 +1,12 @@
+@{
+  Layout = "_Layout";
+}
+
+@model BestRestaurants.Models.Restaurant
+
+<h2>Restaurant Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
+<h3>@Html.DisplayNameFor(model => model.Type): @Html.DisplayFor(model => model.Type)</h3>
+<h3>@Html.DisplayNameFor(model => model.Neighborhood): @Html.DisplayFor(model => model.Neighborhood)</h3>
+<h3>@Html.DisplayNameFor(model => model.Notes): @Html.DisplayFor(model => model.Notes)</h3>
