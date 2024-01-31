@@ -10,8 +10,11 @@
 {
   <h3>No restaurants have been added yet..</h3>
 }
+else
+{
 @foreach (Restaurant restaurant in Model)
 {
-  <h4>@Html.ActionLink($"{restaurant.Name}", "Details", new { id = restaurant.RestaurantId })</h4>
+  <h4>@Html.ActionLink($"{restaurant.Name}", "Details", new { id = restaurant.RestaurantId }) | @restaurant.Cuisine.Name</h4>
+}
 }
 <button>@Html.ActionLink("Add new restaurant", "Create")</button>

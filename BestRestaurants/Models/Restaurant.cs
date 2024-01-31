@@ -7,4 +7,6 @@ public class Restaurant
   public string Type { get; set; }
   public string Neighborhood { get; set; }
   public string Notes { get; set; }
+  public Cuisine Cuisine { get; set; }
+  public int CuisineId { get; set; }
 }

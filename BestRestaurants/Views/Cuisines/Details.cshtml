@@ -3,11 +3,24 @@
 }
 
 @model BestRestaurants.Models.Cuisine
+@using BestRestaurants.Models
 
 <h2>Cuisine Types</h2>
 <hr />
 <h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
 
+@if (@Model.Restaurants.Count == 0)
+{
+  <h3>No restaurants have been added to this category yet...</h3>
+}
+else
+{
+  <h3>Restaurants:</h3>
+  @foreach (Restaurant restaurant in Model.Restaurants)
+  {
+    <h5>@Html.ActionLink($"{restaurant.Name}", "Details", "Restaurants", new { id = restaurant.RestaurantId} )</h5>
+  }
+}
 
 <button>@Html.ActionLink("Edit Cuisine", "Edit", new { id = Model.CuisineId})</button>
 <button>@Html.ActionLink("Delete", "Delete", new { id = Model.CuisineId})</button>
