@@ -23,6 +23,20 @@ namespace BestRestaurants.Controllers
       ViewBag.PageTitle = "View All Items";
       return View(model);
     }
+    //IF WE WANT SEARCH on Rest.list page
+    // public async Task<IActionResult> Index(string searchString)
+    // {
+    //   IQueryable<Restaurant> model = from m in _db.Restaurants
+    //                           .Include(restaurant => restaurant.Cuisine)
+    //                            select m;
+
+    //   if (!String.IsNullOrEmpty(searchString))
+    //   {
+    //     model = model.Where(s => s.Name!.Contains(searchString));
+    //   }
+    //   return View(await model.ToListAsync());
+    // }
+
 
     public ActionResult Create()
     {
