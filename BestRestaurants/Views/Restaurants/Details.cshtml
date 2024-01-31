@@ -10,3 +10,5 @@
 <h3>@Html.DisplayNameFor(model => model.Type): @Html.DisplayFor(model => model.Type)</h3>
 <h3>@Html.DisplayNameFor(model => model.Neighborhood): @Html.DisplayFor(model => model.Neighborhood)</h3>
 <h3>@Html.DisplayNameFor(model => model.Notes): @Html.DisplayFor(model => model.Notes)</h3>
+
+<button>@Html.ActionLink("Edit Restaurant", "Edit", new { id = Model.RestaurantId})</button>

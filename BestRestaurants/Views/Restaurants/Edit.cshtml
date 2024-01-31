@@ -1,0 +1,23 @@
+@{
+  Layout = "_Layout";
+}
+@model BestRestaurants.Models.Restaurant
+
+<h2>Edit</h2>
+<h4>Edit this item: @Html.DisplayFor(model => model.Name)</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.RestaurantId)
+
+  @Html.LabelFor(model => model.Name)
+  @Html.EditorFor(model => model.Name)
+  @Html.LabelFor(model => model.Type)
+  @Html.EditorFor(model => model.Type)
+  @Html.LabelFor(model => model.Neighborhood)
+  @Html.EditorFor(model => model.Neighborhood)
+  @Html.LabelFor(model => model.Notes)
+  @Html.EditorFor(model => model.Notes)
+
+  <input type="submit" value="Update" />
+}
