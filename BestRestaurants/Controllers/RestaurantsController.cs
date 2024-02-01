@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Threading.Tasks; //for search bar
 
 namespace BestRestaurants.Controllers
 {
@@ -17,12 +18,26 @@ namespace BestRestaurants.Controllers
       _db = db;
     }
 
-    public ActionResult Index()
-    {
-      List<Restaurant> model = _db.Restaurants.Include(restaurant => restaurant.Cuisine).ToList();
-      ViewBag.PageTitle = "View All Items";
-      return View(model);
-    }
+private async Task<List<Restaurant>> SearchMethod(string query)
+{
+  IQueryable<Restaurant> results = _db.Set<Restaurant>().Include(resturant => resturant.Cuisine);
+
+  if (query != null)
+  {
+    return await results?.Where(restaurant => restaurant.Name.Contains(query)).ToListAsync();
+  }
+  else{
+    return await results.ToListAsync();
+  }
+}
+
+public async Task<IActionResult> Index(string query)
+{
+  List<Restaurant> resultList = await SearchMethod(query);
+  return View(resultList);
+}
+
+
     //IF WE WANT SEARCH on Rest.list page
     // public async Task<IActionResult> Index(string searchString)
     // {
@@ -36,8 +51,13 @@ namespace BestRestaurants.Controllers
     //   }
     //   return View(await model.ToListAsync());
     // }
-
-
+//old index before search bar
+    // public ActionResult Index()
+    // {
+    //   List<Restaurant> model = _db.Restaurants.Include(restaurant => restaurant.Cuisine).ToList();
+    //   ViewBag.PageTitle = "View All Items";
+    //   return View(model);
+    // }
     public ActionResult Create()
     {
       ViewBag.CuisineId = new SelectList(_db.Cuisines, "CuisineId", "Name");

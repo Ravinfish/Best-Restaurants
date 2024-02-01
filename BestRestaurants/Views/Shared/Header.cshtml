@@ -4,11 +4,12 @@
   <button class="navButton">@Html.ActionLink("Cuisines", "Index", "Cuisines")</button>
   <button>@Html.ActionLink("Home", "Index", "Home")</button>
 </div>
+<!-- search bar -->
 <div class="text-center">
   <form asp-controller="Restaurants" asp-action="Index">
     <p>
-      <input type="text" name="SearchString" placeholder="search" />
-      <input type="submit" value="Filter" />
+      <input type="text" name="Query" placeholder="search..." />
+      <input type="submit" value="Find" />
     </p>
   </form>
 </div>
