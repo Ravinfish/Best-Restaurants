@@ -1,0 +1,20 @@
+@{
+  Layout = "_Layout";
+}
+@model BestRestaurants.Models.Review
+
+<h2>Edit</h2>
+<h4>Edit this review: @Html.DisplayFor(model => model.Feedback)</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.RestaurantId)
+
+  @Html.LabelFor(model => model.Feedback)
+  @Html.EditorFor(model => model.Feedback)
+  <br />
+  @Html.LabelFor(model => model.Rating)
+  @Html.EditorFor(model => model.Rating)
+  <br />
+  <input type="submit" value="Update" />
+}

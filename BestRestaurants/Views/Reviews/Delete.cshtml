@@ -1,0 +1,14 @@
+@{
+  Layout = "_Layout";
+}
+
+@model BestRestaurants.Models.Review
+
+<h2>Are you <em>sure</em> you want to delete this?</h2>
+
+@Html.DisplayNameFor(model => model.Feedback): @Html.DisplayFor(model => model.Feedback) 
+<!-- too wordy? new property for 'title' or do a set # char of this... -->
+@using (Html.BeginForm())
+{
+  <input type="submit" value="Delete" />
+}

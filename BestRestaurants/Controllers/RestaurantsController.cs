@@ -18,40 +18,27 @@ namespace BestRestaurants.Controllers
       _db = db;
     }
 
-private async Task<List<Restaurant>> SearchMethod(string query)
-{
-  IQueryable<Restaurant> results = _db.Set<Restaurant>().Include(resturant => resturant.Cuisine);
+    private async Task<List<Restaurant>> SearchMethod(string query)
+    {
+      IQueryable<Restaurant> results = _db.Set<Restaurant>().Include(resturant => resturant.Cuisine);
 
-  if (query != null)
-  {
-    return await results?.Where(restaurant => restaurant.Name.Contains(query)).ToListAsync();
-  }
-  else{
-    return await results.ToListAsync();
-  }
-}
+      if (query != null)
+      {
+        return await results?.Where(restaurant => restaurant.Name.Contains(query)).ToListAsync();
+      }
+      else
+      {
+        return await results.ToListAsync();
+      }
+    }
 
-public async Task<IActionResult> Index(string query)
-{
-  List<Restaurant> resultList = await SearchMethod(query);
-  return View(resultList);
-}
+    public async Task<IActionResult> Index(string query)
+    {
+      List<Restaurant> resultList = await SearchMethod(query);
+      return View(resultList);
+    }
 
-
-    //IF WE WANT SEARCH on Rest.list page
-    // public async Task<IActionResult> Index(string searchString)
-    // {
-    //   IQueryable<Restaurant> model = from m in _db.Restaurants
-    //                           .Include(restaurant => restaurant.Cuisine)
-    //                            select m;
-
-    //   if (!String.IsNullOrEmpty(searchString))
-    //   {
-    //     model = model.Where(s => s.Name!.Contains(searchString));
-    //   }
-    //   return View(await model.ToListAsync());
-    // }
-//old index before search bar
+    //old index before search bar
     // public ActionResult Index()
     // {
     //   List<Restaurant> model = _db.Restaurants.Include(restaurant => restaurant.Cuisine).ToList();
@@ -79,6 +66,9 @@ public async Task<IActionResult> Index(string query)
     {
       Restaurant thisRestaurant = _db.Restaurants
       .Include(restaurant => restaurant.Cuisine)
+      .Include(restaurant => restaurant.Reviews)
+      // .Include(review => review.Restaurant) 
+      //which .include to attach review to restaurant?
       .FirstOrDefault(restaurant => restaurant.RestaurantId == id);
       return View(thisRestaurant);
     }

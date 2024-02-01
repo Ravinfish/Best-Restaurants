@@ -1,0 +1,24 @@
+@{
+  Layout = "_Layout";
+}
+
+@model BestRestaurants.Models.Review
+
+<h4>Add a review</h4>
+<hr />
+<p><strong>NOTE:</strong> You need to attach your review to an existing restaurant before you can add a review!</p>
+<p>Go to @Html.ActionLink("this page", "Create", "Restaurants") to add a restaurant.</p>
+<hr />
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Feedback)
+  @Html.TextBoxFor(model => model.Feedback)
+  <br />
+  @Html.LabelFor(model => model.Rating)
+  @Html.TextBoxFor(model => model.Rating)
+  <br />
+  @Html.LabelFor(model => model.Restaurant)
+  @Html.DropDownList("RestaurantId");
+  <br />
+  <input type="submit" value="Submit review" />
+}
