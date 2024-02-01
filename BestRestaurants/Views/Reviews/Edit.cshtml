@@ -8,7 +8,7 @@
 
 @using (Html.BeginForm())
 {
-  @Html.HiddenFor(model => model.RestaurantId)
+  @Html.HiddenFor(model => model.ReviewId)
 
   @Html.LabelFor(model => model.Feedback)
   @Html.EditorFor(model => model.Feedback)
@@ -16,5 +16,6 @@
   @Html.LabelFor(model => model.Rating)
   @Html.EditorFor(model => model.Rating)
   <br />
+  
   <input type="submit" value="Update" />
 }
