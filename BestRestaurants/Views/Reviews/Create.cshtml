@@ -17,10 +17,10 @@
   @Html.LabelFor(model => model.Rating)
   @Html.TextBoxFor(model => model.Rating)
   <br />
-
+  @Html.LabelFor(model => model.Restaurant)
+  @Html.DropDownList("RestaurantId");
   <br />
   <input type="submit" value="Submit review" />
 }
 
-<!-- @Html.LabelFor(model => model.Restaurant)
-@Html.DropDownList("RestaurantId"); -->
+

@@ -62,7 +62,7 @@ namespace BestRestaurants.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-    public ActionResult Details(int id)
+     public ActionResult Details(int id)
     {
       Restaurant thisRestaurant = _db.Restaurants
       .Include(restaurant => restaurant.Cuisine)

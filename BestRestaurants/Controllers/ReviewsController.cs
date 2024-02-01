@@ -38,9 +38,10 @@ public class ReviewsController: Controller
       }
       _db.Reviews.Add(review);
       _db.SaveChanges();
-      return RedirectToAction("Restaurant");
-    }
-    
+      return RedirectToAction("Index");
+    //??? return RedirectToAction("Details", "Restaurants", new { id = review.RestaurantId });
+  }
+
     public ActionResult Details(int id)
     {
       Review thisReview = _db.Reviews
