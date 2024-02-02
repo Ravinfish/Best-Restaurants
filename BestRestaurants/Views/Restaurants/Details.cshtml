@@ -5,16 +5,22 @@
 @model BestRestaurants.Models.Restaurant
 @using BestRestaurants.Models
 
-<h2>Restaurant Details</h2>
-<hr />
-<br>
-<h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
-<h3>@Html.DisplayNameFor(model => model.Type): @Html.DisplayFor(model => model.Type)</h3>
-<h3>@Html.DisplayNameFor(model => model.Neighborhood): @Html.DisplayFor(model => model.Neighborhood)</h3>
-<h3>@Html.DisplayNameFor(model => model.Notes): @Html.DisplayFor(model => model.Notes)</h3>
-<h3>@Html.DisplayNameFor(model => model.Cuisine): @Html.DisplayFor(model => model.Cuisine.Name)</h3>
-<br>
+<div class="row">
+  <div class="card col-sm-8 mx-auto p-3" style="width: 30rem">
+    <h2>Restaurant Details</h2>
+    <hr />
+    <div>
+      <h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
+      <h3>@Html.DisplayNameFor(model => model.Type): @Html.DisplayFor(model => model.Type)</h3>
+      <h3>@Html.DisplayNameFor(model => model.Neighborhood): @Html.DisplayFor(model => model.Neighborhood)</h3>
+      <h3>@Html.DisplayNameFor(model => model.Notes): @Html.DisplayFor(model => model.Notes)</h3>
+      <h3>@Html.DisplayNameFor(model => model.Cuisine): @Html.DisplayFor(model => model.Cuisine.Name)</h3>
+    </div>
+  </div>
+</div>
+
 <hr>
+<div class="mx-5">
 <h3>Reviews</h3>
 @if (@Model.Reviews.Count == 0)
 {
@@ -22,11 +28,14 @@
 }
 else
 {
+  <ul>
   @foreach (Review review in Model.Reviews)
   {
-    <h5>@Html.ActionLink($"{review.Feedback}", "Details", "Reviews", new { id = review.ReviewId })</h5>
+    <li>@Html.ActionLink($"{review.Feedback}", "Details", "Reviews", new { id = review.ReviewId })</li>
   }
+  </ul>
 }
+</div>
 
 
 <button>@Html.ActionLink("Edit Restaurant", "Edit", new { id = Model.RestaurantId })</button>

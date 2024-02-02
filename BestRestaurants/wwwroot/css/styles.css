@@ -1,4 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+
 body {
-  background-color: bisque;
+  background-image: linear-gradient(to bottom right, rgb(246, 121, 190), rgb(165, 250, 246));
+  background-size: 100% Npx;
   margin: 3%;
+  font-family: "Lato", sans-serif;
+}
+
+h4 {
+  font-family: "Lato", sans-serif;
+}
+
+button {
+  background-color: rgb(233, 233, 233);
+  border-radius: 10px;
+}
+
+a {
+  font-family: "Lato", sans-serif;
+  color: purple;
+  text-decoration: none;
+}
+
+input {
+  border-radius: 10px;
+}
+
+h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: xxxl;
+  letter-spacing: 10px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.486);
+}
+
+button {
+  /* align-items: center; */
+  background-image: linear-gradient(144deg, #af40ff31, #aaa0eb 50%, #00dbeb2d);
+  border: 0;
+  border-radius: 8px;
+  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  /* display: flex; */
+  font-family: Phantomsans, sans-serif;
+  font-size: 20px;
+  justify-content: center;
+  line-height: 1em;
+  max-width: 100%;
+  min-width: 100px;
+  padding: 3px;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+button:active,
+button:hover {
+  outline: 0;
+}
+
+button span {
+  background-color: rgb(5, 6, 45);
+  padding: 16px 24px;
+  border-radius: 6px;
+  width: 100%;
+  height: 100%;
+  transition: 300ms;
+}
+
+button:hover span {
+  background: none;
+}
+
+@media (min-width: 768px) {
+  button {
+    font-size: 24px;
+    min-width: 196px;
+  }
+}
+
+div#footer {
+  display: flex;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  color: #CCC;
+  padding: 8px;
 }
