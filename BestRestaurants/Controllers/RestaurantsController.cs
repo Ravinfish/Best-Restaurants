@@ -108,7 +108,6 @@ namespace BestRestaurants.Controllers
       Restaurant thisRestaurant = _db.Restaurants.FirstOrDefault(restaurants => restaurants.RestaurantId == id);
       List<Service> services = _db.Services.ToList();
       ViewBag.Services = services;
-      // ViewBag.ServiceId = new SelectList(_db.Services, "ServiceId", "Type");
       return View(thisRestaurant);
     }
 
@@ -119,9 +118,9 @@ namespace BestRestaurants.Controllers
       {
         foreach (var serviceId in serviceIds)
         {
-#nullable enable
+          #nullable enable
           RestaurantService? joinEntity = _db.RestaurantServices.FirstOrDefault(join => join.ServiceId == serviceId && join.RestaurantId == restaurant.RestaurantId);
-#nullable disable
+          #nullable disable
           if (joinEntity == null)
           {
             _db.RestaurantServices.Add(new RestaurantService() { ServiceId = serviceId, RestaurantId = restaurant.RestaurantId });
@@ -130,24 +129,19 @@ namespace BestRestaurants.Controllers
         }
         return RedirectToAction("Details", new { id = restaurant.RestaurantId });
       }
-    else
-    {
-      return RedirectToAction("Index", "Home");
+      else
+      {
+        return RedirectToAction("Index", "Home");
+      }
     }
+    [HttpPost]
+    public ActionResult DeleteJoin(int joinId)
+    {
+      RestaurantService joinEntry = _db.RestaurantServices.FirstOrDefault(entry => entry.RestaurantServiceId == joinId);
+      _db.RestaurantServices.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
     }
   }
 }
 
-// [HttpPost]
-// public ActionResult AddService(Restaurant restaurant, int serviceId)
-// {
-// #nullable enable
-//   RestaurantService? joinEntity = _db.RestaurantServices.FirstOrDefault(join => (join.ServiceId == serviceId && join.RestaurantId == restaurant.RestaurantId));
-// #nullable disable
-//   if (joinEntity == null && serviceId != 0)
-//   {
-//     _db.RestaurantServices.Add(new RestaurantService() { ServiceId = serviceId, RestaurantId = restaurant.RestaurantId });
-//     _db.SaveChanges();
-//   }
-//   return RedirectToAction("Details", new { id = restaurant.RestaurantId });
-// }

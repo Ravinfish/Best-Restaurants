@@ -29,6 +29,11 @@ else
     @foreach(RestaurantService join in Model.JoinEntities)
     {
       <li>@join.Service.Type</li>
+      @using (Html.BeginForm("DeleteJoin", "Restaurants"))
+      {
+        @Html.Hidden("joinId", @join.RestaurantServiceId)
+        <input type="submit" value="Delete"/>
+      }
     }
   </ul>
 }

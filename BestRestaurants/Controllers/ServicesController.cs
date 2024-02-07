@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Threading.Tasks.Dataflow;
+using System;
 
 namespace BestRestaurants.Controllers
 {
@@ -47,6 +48,14 @@ namespace BestRestaurants.Controllers
         _db.SaveChanges();
       }
       return RedirectToAction("Details", new { id = service.ServiceId });
+    }
+    [HttpPost]
+    public ActionResult DeleteJoin(int joinId)
+    {
+      RestaurantService joinEntry = _db.RestaurantServices.FirstOrDefault(entry => entry.RestaurantServiceId == joinId);
+      _db.RestaurantServices.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
     }
   }
 }

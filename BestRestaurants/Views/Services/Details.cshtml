@@ -19,8 +19,16 @@ else
   @foreach(RestaurantService join in Model.JoinEntities)
   {
     <li>@join.Restaurant.Name</li>
+    @using (Html.BeginForm("DeleteJoin", "Services"))
+    {
+      @Html.Hidden("joinId", @join.RestaurantServiceId)
+      <input type="submit" value="Delete"/>
+    }
   }
   </ul>
 }
+<hr />
+...
+<p>@Html.ActionLink("Edit Service", "Edit", new { id = Model.ServiceId })</p>
 ...
 <p>@Html.ActionLink("Add a Restaurant", "AddRestaurant", new { id = Model.ServiceId })</p>
