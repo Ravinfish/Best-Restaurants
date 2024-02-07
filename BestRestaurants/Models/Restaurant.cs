@@ -12,4 +12,5 @@ public class Restaurant
   public Cuisine Cuisine { get; set; }
   public int CuisineId { get; set; }
   public List<Review> Reviews { get; set; }
+  public List<RestaurantService> JoinEntities { get; }
 }

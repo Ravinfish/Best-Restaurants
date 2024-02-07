@@ -7,5 +7,7 @@ namespace BestRestaurants.Models;
     public DbSet<Cuisine> Cuisines { get; set; }
 
     public DbSet<Review> Reviews { get; set; }
+    public DbSet<Service> Services { get; set;}
+    public DbSet<RestaurantService> RestaurantServices { get; set; }
     public BestRestaurantsContext(DbContextOptions options) : base(options) { }
   }
