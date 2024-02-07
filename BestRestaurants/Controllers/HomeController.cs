@@ -1,9 +1,5 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using BestRestaurants.Models;
-using System;
-using System.Threading.Tasks;
-//using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,21 +7,23 @@ namespace BestRestaurants.Controllers;
 
 public class HomeController : Controller
 {
+  private readonly BestRestaurantsContext _db;
+  public HomeController(BestRestaurantsContext db)
+  {
+    _db = db;
+  }
+  [HttpGet("/")]
   public ActionResult Index()
   {
-    return View();
-    // public async Task<IActionResult> Index(string searchString)
-    // {
-      // IQueryable<Restaurant> model = from m in _db.Restaurants
-      //                         .Include(restaurant => restaurant.Cuisine)
-      //                          select m;
+    Cuisine[] cuisines = _db.Cuisines.ToArray();
+    Restaurant[] restaurants = _db.Restaurants.ToArray();
+    Service[] services = _db.Services.ToArray();
+    Dictionary<string,object[]> model = new Dictionary<string, object[]>();
+    model.Add("cuisines", cuisines);
+    model.Add("restaurants", restaurants);
+    model.Add("services", services);
+    return View(model);
 
-      // if (!String.IsNullOrEmpty(searchString))
-      // {
-      //   model = model.Where(s => s.Name!.Contains(searchString));
-      // }
-      // return View(await model.ToListAsync());
-    }
-
-  
   }
+
+}
