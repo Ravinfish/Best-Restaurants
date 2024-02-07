@@ -1,0 +1,18 @@
+@{
+  Layout = "_Layout";
+}
+@model BestRestaurants.Models.Restaurant
+
+<h2>Add a service</h2>
+<h4>Choose services to add to this restaurant: @Html.DisplayFor(model => model.Name)</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.RestaurantId)
+
+  @Html.Label("Select meal service")
+  @Html.DropDownList("ServiceId")
+
+  <input type="submit" value="Save" />
+}
+<!-- wnat to change dropdown to checkbox -->

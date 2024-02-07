@@ -102,5 +102,26 @@ namespace BestRestaurants.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    public ActionResult AddService(int id)
+    {
+      Restaurant thisRestaurant = _db.Restaurants.FirstOrDefault(restaurants => restaurants.RestaurantId == id);
+      ViewBag.ServiceId = new SelectList(_db.Services, "ServiceId", "Type");
+      return View(thisRestaurant);
+    }
+
+    [HttpPost]
+    public ActionResult AddService(Restaurant restaurant, int serviceId)
+    {
+      #nullable enable
+      RestaurantService? joinEntity = _db.RestaurantServices.FirstOrDefault(join => (join.ServiceId == serviceId && join.RestaurantId == restaurant.RestaurantId));
+      #nullable disable
+      if (joinEntity == null && serviceId != 0)
+      {
+        _db.RestaurantServices.Add(new RestaurantService() { ServiceId = serviceId, RestaurantId = restaurant.RestaurantId });
+        _db.SaveChanges();
+      }
+      return RedirectToAction("Details", new { id = restaurant.RestaurantId});
+    }
   }
 }

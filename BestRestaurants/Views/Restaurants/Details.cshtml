@@ -35,7 +35,8 @@ else
   </ul>
 }
 </div>
-
+...
+<p>@Html.ActionLink("Add a Service", "AddService", new { id = Model.RestaurantId })</p>
 
 <button>@Html.ActionLink("Edit Restaurant", "Edit", new { id = Model.RestaurantId })</button>
 <button>@Html.ActionLink("Delete", "Delete", new { id = Model.RestaurantId })</button>

@@ -29,16 +29,24 @@ namespace BestRestaurants.Controllers
         .FirstOrDefault(service => service.ServiceId == id);
       return View(thisService);
     }
-    public ActionResult Create()
+    public ActionResult AddRestaurant(int id)
     {
-      return View();
+      Service thisService = _db.Services.FirstOrDefault(services => services.ServiceId == id);
+      ViewBag.RestaurantId = new SelectList(_db.Restaurants, "RestaurantId", "Name");
+      return View(thisService);
     }
     [HttpPost]
-    public ActionResult Create(Service service)
+    public ActionResult AddRestaurant(Service service, int restaurantId)
     {
-      _db.Services.Add(service);
-      _db.SaveChanges();
-      return RedirectToAction("Index");
+      #nullable enable
+      RestaurantService? joinEntity = _db.RestaurantServices.FirstOrDefault(join => (join.RestaurantId == restaurantId && join.ServiceId == service.ServiceId));
+      #nullable disable
+      if (joinEntity == null && restaurantId != 0)
+      {
+        _db.RestaurantServices.Add(new RestaurantService() { RestaurantId = restaurantId, ServiceId = service.ServiceId });
+        _db.SaveChanges();
+      }
+      return RedirectToAction("Details", new { id = service.ServiceId });
     }
   }
 }
