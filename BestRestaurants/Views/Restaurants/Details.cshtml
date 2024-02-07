@@ -17,8 +17,23 @@
     </div>
   </div>
 </div>
+<hr />
+@if(@Model.JoinEntities.Count == 0)
+{
+  <p>This restaurant has not displayed it's meal services yet.</p>
+}
+else
+{
+  <h4>This restaurant offers the following meal services: </h4>
+  <ul>
+    @foreach(RestaurantService join in Model.JoinEntities)
+    {
+      <li>@join.Service.Type</li>
+    }
+  </ul>
+}
 
-<hr>
+<hr />
 <div class="mx-5">
 <h3>Reviews</h3>
 @if (@Model.Reviews.Count == 0)
@@ -35,7 +50,7 @@ else
   </ul>
 }
 </div>
-...
+<hr />
 <p>@Html.ActionLink("Add a Service", "AddService", new { id = Model.RestaurantId })</p>
 
 <button>@Html.ActionLink("Edit Restaurant", "Edit", new { id = Model.RestaurantId })</button>

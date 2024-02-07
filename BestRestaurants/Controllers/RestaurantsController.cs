@@ -62,13 +62,13 @@ namespace BestRestaurants.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-     public ActionResult Details(int id)
+    public ActionResult Details(int id)
     {
       Restaurant thisRestaurant = _db.Restaurants
       .Include(restaurant => restaurant.Cuisine)
       .Include(restaurant => restaurant.Reviews)
       .Include(restaurant => restaurant.JoinEntities)
-      .ThenInclude(join => join.Service) 
+      .ThenInclude(join => join.Service)
       .FirstOrDefault(restaurant => restaurant.RestaurantId == id);
       return View(thisRestaurant);
     }
@@ -106,22 +106,48 @@ namespace BestRestaurants.Controllers
     public ActionResult AddService(int id)
     {
       Restaurant thisRestaurant = _db.Restaurants.FirstOrDefault(restaurants => restaurants.RestaurantId == id);
-      ViewBag.ServiceId = new SelectList(_db.Services, "ServiceId", "Type");
+      List<Service> services = _db.Services.ToList();
+      ViewBag.Services = services;
+      // ViewBag.ServiceId = new SelectList(_db.Services, "ServiceId", "Type");
       return View(thisRestaurant);
     }
 
     [HttpPost]
-    public ActionResult AddService(Restaurant restaurant, int serviceId)
+    public ActionResult AddService(Restaurant restaurant, int[] serviceIds)
     {
-      #nullable enable
-      RestaurantService? joinEntity = _db.RestaurantServices.FirstOrDefault(join => (join.ServiceId == serviceId && join.RestaurantId == restaurant.RestaurantId));
-      #nullable disable
-      if (joinEntity == null && serviceId != 0)
+      if (serviceIds != null && serviceIds.Length > 0)
       {
-        _db.RestaurantServices.Add(new RestaurantService() { ServiceId = serviceId, RestaurantId = restaurant.RestaurantId });
-        _db.SaveChanges();
+        foreach (var serviceId in serviceIds)
+        {
+#nullable enable
+          RestaurantService? joinEntity = _db.RestaurantServices.FirstOrDefault(join => join.ServiceId == serviceId && join.RestaurantId == restaurant.RestaurantId);
+#nullable disable
+          if (joinEntity == null)
+          {
+            _db.RestaurantServices.Add(new RestaurantService() { ServiceId = serviceId, RestaurantId = restaurant.RestaurantId });
+          }
+          _db.SaveChanges();
+        }
+        return RedirectToAction("Details", new { id = restaurant.RestaurantId });
       }
-      return RedirectToAction("Details", new { id = restaurant.RestaurantId});
+    else
+    {
+      return RedirectToAction("Index", "Home");
+    }
     }
   }
 }
+
+// [HttpPost]
+// public ActionResult AddService(Restaurant restaurant, int serviceId)
+// {
+// #nullable enable
+//   RestaurantService? joinEntity = _db.RestaurantServices.FirstOrDefault(join => (join.ServiceId == serviceId && join.RestaurantId == restaurant.RestaurantId));
+// #nullable disable
+//   if (joinEntity == null && serviceId != 0)
+//   {
+//     _db.RestaurantServices.Add(new RestaurantService() { ServiceId = serviceId, RestaurantId = restaurant.RestaurantId });
+//     _db.SaveChanges();
+//   }
+//   return RedirectToAction("Details", new { id = restaurant.RestaurantId });
+// }

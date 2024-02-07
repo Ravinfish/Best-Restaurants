@@ -11,7 +11,13 @@
   @Html.HiddenFor(model => model.RestaurantId)
 
   @Html.Label("Select meal service")
-  @Html.DropDownList("ServiceId")
+  @foreach (var service in ViewBag.Services as List<BestRestaurants.Models.Service>)
+  {
+    <div>
+      <input type="checkbox" id="@("ServiceId_" + service.ServiceId)" name="ServiceIds" value="@service.ServiceId" />
+      <label for="@("ServiceId_" + service.ServiceId)">@service.Type</label>
+    </div>
+  }
 
   <input type="submit" value="Save" />
 }
