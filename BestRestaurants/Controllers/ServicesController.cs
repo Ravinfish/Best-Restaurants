@@ -29,5 +29,16 @@ namespace BestRestaurants.Controllers
         .FirstOrDefault(service => service.ServiceId == id);
       return View(thisService);
     }
+    public ActionResult Create()
+    {
+      return View();
+    }
+    [HttpPost]
+    public ActionResult Create(Service service)
+    {
+      _db.Services.Add(service);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }
