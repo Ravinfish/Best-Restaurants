@@ -67,8 +67,8 @@ namespace BestRestaurants.Controllers
       Restaurant thisRestaurant = _db.Restaurants
       .Include(restaurant => restaurant.Cuisine)
       .Include(restaurant => restaurant.Reviews)
-      // .Include(review => review.Restaurant) 
-      //which .include to attach review to restaurant?
+      .Include(restaurant => restaurant.JoinEntities)
+      .ThenInclude(join => join.Service) 
       .FirstOrDefault(restaurant => restaurant.RestaurantId == id);
       return View(thisRestaurant);
     }

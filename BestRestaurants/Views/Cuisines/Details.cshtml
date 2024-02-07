@@ -2,8 +2,10 @@
   Layout = "_Layout";
 }
 
-@model BestRestaurants.Models.Cuisine
-@using BestRestaurants.Models
+@model BestRestaurants.Models.Cuisine;
+@using BestRestaurants.Models;
+@using System.Collections.Generic;
+
 <div class="row">
   <div class="card col-sm-8 mx-auto p-3" style="width: 30rem">
 <h2>Cuisine Types</h2>
@@ -19,7 +21,21 @@ else
   <h3>Restaurants:</h3>
   @foreach (Restaurant restaurant in Model.Restaurants)
   {
-    <h5>@Html.ActionLink($"{restaurant.Name}", "Details", "Restaurants", new { id = restaurant.RestaurantId} )</h5>
+    string services = "";
+    @if(restaurant.JoinEntities.Count == 0)
+    {
+      services = "This restaurant does not have any meal services added to it";
+    }
+    else
+    {
+      List<string> serviceList = new List<string>();
+      @foreach(RestaurantService join in restaurant.JoinEntities)
+      {
+        serviceList.Add(join.Service.Type);
+      }
+      services = String.Join(", ", serviceList);
+    }
+    <h5>@Html.ActionLink($"{restaurant.Name}", "Details", "Restaurants", new { id = restaurant.RestaurantId} ) | Meal Services: @services</h5>
   }
 }
 </div>

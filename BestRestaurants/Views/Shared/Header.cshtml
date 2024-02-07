@@ -1,19 +1,20 @@
 <h1 class="text-center">Bridge City Bites</h1>
 <br>
 <div class=header>
-<div id="navbar" class="text-center">
-  <button class="navButton">@Html.ActionLink("Restaurants", "Index", "Restaurants")</button>
-  <button class="navButton">@Html.ActionLink("Cuisines", "Index", "Cuisines")</button>
-  <button>@Html.ActionLink("Home", "Index", "Home")</button>
-</div>
-<!-- search bar -->
-<div class="text-center">
-  <form asp-controller="Restaurants" asp-action="Index">
-    <p>
-      <input type="text" name="Query" placeholder="search..." />
-      <input type="submit" value="Find" />
-    </p>
-  </form>
-</div>
+  <div id="navbar" class="text-center">
+    <button class="navButton">@Html.ActionLink("Restaurants", "Index", "Restaurants")</button>
+    <button class="navButton">@Html.ActionLink("Cuisines", "Index", "Cuisines")</button>
+    <button>@Html.ActionLink("Home", "Index", "Home")</button>
+    <button>@Html.ActionLink("Meal Services", "Index", "Services")</button>
+  </div>
+  <!-- search bar -->
+  <div class="text-center">
+    <form asp-controller="Restaurants" asp-action="Index">
+      <p>
+        <input type="text" name="Query" placeholder="search..." />
+        <input type="submit" value="Find" />
+      </p>
+    </form>
+  </div>
 </div>
 <hr />

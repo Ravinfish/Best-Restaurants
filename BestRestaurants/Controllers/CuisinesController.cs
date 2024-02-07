@@ -35,6 +35,8 @@ public class CuisinesController: Controller
     {
       Cuisine thisCuisine = _db.Cuisines
       .Include(cuisine => cuisine.Restaurants)
+      .ThenInclude(restaurant => restaurant.JoinEntities)
+      .ThenInclude(join => join.Service) 
       .FirstOrDefault(cuisine => cuisine.CuisineId == id);
       return View(thisCuisine);
     }
