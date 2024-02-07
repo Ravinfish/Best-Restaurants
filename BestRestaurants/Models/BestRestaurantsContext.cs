@@ -10,4 +10,16 @@ namespace BestRestaurants.Models;
     public DbSet<Service> Services { get; set;}
     public DbSet<RestaurantService> RestaurantServices { get; set; }
     public BestRestaurantsContext(DbContextOptions options) : base(options) { }
-  }
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        builder.Entity<Service>()
+        .HasData(
+          new Service { ServiceId = 1, Type = "Breakfast" },
+          new Service { ServiceId = 2, Type = "Brunch" },
+          new Service { ServiceId = 3, Type = "Lunch" },
+          new Service { ServiceId = 4, Type = "Happy Hour" },
+          new Service { ServiceId = 5, Type = "Dinner" }
+        );
+    }
+}

@@ -2,6 +2,7 @@
 using BestRestaurants.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BestRestaurants.Migrations
 {
     [DbContext(typeof(BestRestaurantsContext))]
-    partial class BestRestaurantsContextModelSnapshot : ModelSnapshot
+    [Migration("20240207192358_RemoveDayPropertyFromService")]
+    partial class RemoveDayPropertyFromService
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,33 +114,6 @@ namespace BestRestaurants.Migrations
                     b.HasKey("ServiceId");
 
                     b.ToTable("Services");
-
-                    b.HasData(
-                        new
-                        {
-                            ServiceId = 1,
-                            Type = "Breakfast"
-                        },
-                        new
-                        {
-                            ServiceId = 2,
-                            Type = "Brunch"
-                        },
-                        new
-                        {
-                            ServiceId = 3,
-                            Type = "Lunch"
-                        },
-                        new
-                        {
-                            ServiceId = 4,
-                            Type = "Happy Hour"
-                        },
-                        new
-                        {
-                            ServiceId = 5,
-                            Type = "Dinner"
-                        });
                 });
 
             modelBuilder.Entity("BestRestaurants.Models.Restaurant", b =>
