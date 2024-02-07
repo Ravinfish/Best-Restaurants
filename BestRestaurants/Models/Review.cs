@@ -11,5 +11,4 @@ public class Review
   public int RestaurantId { get; set; }
   public Restaurant Restaurant { get; set; }
 
-  // public List<Restaurant> Restaurants { get; set; }
 }
