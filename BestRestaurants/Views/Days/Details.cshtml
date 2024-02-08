@@ -1,0 +1,25 @@
+@{
+  Layout = "_Layout";
+}
+@using BestRestaurants.Models
+@model BestRestaurants.Models.Day
+
+<h2>Day Details</h2>
+<hr />
+<h3>@Html.DisplayFor(model => model.Name)</h3>
+
+@if (Model.JoinEntities.Count == 0)
+{
+  <p>This day does not belong to any meal services</p>
+}
+else
+{
+  <h4>Meal Services this Day belongs to:</h4>
+  <ul>
+    @foreach (DayService join in Model.JoinEntities)
+    {
+      <li>@join.Service.Type</li>
+    }
+  </ul>
+}
+<p>@Html.ActionLink("Add a Service", "AddService", new { id = Model.DayId })</p>

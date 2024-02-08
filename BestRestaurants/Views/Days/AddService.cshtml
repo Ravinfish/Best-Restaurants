@@ -1,0 +1,17 @@
+@{
+  Layout = "_Layout";
+}
+
+@model BestRestaurants.Models.Day
+
+<h2>Add a Service</h2>
+<h4>Add a service to this day: @Html.DisplayFor(model => model.Name) </h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.DayId)
+  @Html.Label("Select Service")
+  @Html.DropDownList("ServiceId")
+
+  <input type="submit" value="Save" />
+}
