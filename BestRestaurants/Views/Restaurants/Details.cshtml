@@ -37,6 +37,22 @@ else
     }
   </ul>
 }
+@if (@Model.JoinEntity.Count == 0 || @Model.JoinEntity == null)
+{
+  <p>This restaurant has no days or hours attached yet</p>
+}
+else
+{
+  <h4>This restaurant has the following schedule: </h4>
+  <ul>
+    @foreach (DayRestaurant join in Model.JoinEntity)
+    {
+      <li>Day: @join.Day.Name</li>
+      <li>Time: @join.Day.Time</li>
+    }
+  </ul>
+}
+
 
 <hr />
 <div class="mx-5">
@@ -57,7 +73,9 @@ else
 </div>
 <hr />
 <p>@Html.ActionLink("Add a Service", "AddService", new { id = Model.RestaurantId })</p>
+<p>@Html.ActionLink("Add a day", "AddDay", new { id = Model.RestaurantId })</p>
 
 <button>@Html.ActionLink("Edit Restaurant", "Edit", new { id = Model.RestaurantId })</button>
 <button>@Html.ActionLink("Delete", "Delete", new { id = Model.RestaurantId })</button>
 <button>@Html.ActionLink("Add Review", "Create", "Reviews")</button>
+

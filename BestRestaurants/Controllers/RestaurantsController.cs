@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Threading.Tasks; //for search bar
+using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow; //for search bar
 
 namespace BestRestaurants.Controllers
 {
@@ -69,6 +70,8 @@ namespace BestRestaurants.Controllers
       .Include(restaurant => restaurant.Reviews)
       .Include(restaurant => restaurant.JoinEntities)
       .ThenInclude(join => join.Service)
+      .Include(restaurant => restaurant.JoinEntity)
+      .ThenInclude(join => join.Day)
       .FirstOrDefault(restaurant => restaurant.RestaurantId == id);
       return View(thisRestaurant);
     }
@@ -142,6 +145,33 @@ namespace BestRestaurants.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+    public ActionResult AddDay(int id)
+    {
+      Restaurant thisRestaurant = _db.Restaurants.FirstOrDefault(restaurants => restaurants.RestaurantId == id);
+      ViewBag.DayId = new SelectList(_db.Days, "DayId", "Name");
+      return View(thisRestaurant);
+    }
+    [HttpPost]
+    public ActionResult AddDay(Restaurant restaurant, int dayId, string time)
+    {
+      #nullable enable
+      DayRestaurant? joinEntity = _db.DayRestaurants.FirstOrDefault(join => (join.DayId == dayId && join.RestaurantId == restaurant.RestaurantId));
+      #nullable disable
+      if (joinEntity == null & dayId != 0)
+      {
+        _db.DayRestaurants.Add(new DayRestaurant() { DayId = dayId, RestaurantId = restaurant.RestaurantId });
+
+        Day day = _db.Days.FirstOrDefault(day => day.DayId == dayId);
+        if (day!= null)
+        {
+          day.Time = time;
+        }
+        
+        _db.SaveChanges();
+      }
+      return RedirectToAction("Details", new { id = restaurant.RestaurantId });
+    }
+
   }
 }
 

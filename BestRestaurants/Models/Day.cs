@@ -6,7 +6,7 @@ public class Day
 {
   public int DayId { get; set; }
   public string Name { get; set;}
-  string Time { get; set; }
+  public string Time { get; set; }
   public List<DayService> JoinEntities { get;}
   public List<DayRestaurant> JoinEntity { get; }
 }
