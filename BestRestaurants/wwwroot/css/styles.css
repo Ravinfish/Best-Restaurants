@@ -2,11 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
 
 body {
-  background-image: linear-gradient(to bottom right, rgb(246, 121, 190), rgb(165, 250, 246));
-  background-size: 100% Npx;
+  background-image: linear-gradient(to bottom right, rgb(242, 165, 169), rgb(233, 211, 145));
+  /* background-size: 100% Npx; */
   margin: 3%;
   font-family: "Lato", sans-serif;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 h4 {
@@ -22,6 +22,14 @@ a {
   font-family: "Lato", sans-serif;
   color: purple;
   text-decoration: none;
+}
+
+#splashCard {
+  background-color: rgb(242, 165, 169);
+  padding: 5px;
+  padding-top: 10px;
+  border: 1px solid black;
+  margin: 7px;
 }
 
 input {
@@ -94,7 +102,7 @@ button:hover span {
 
 div#footer {
   display: flex;
-  position: fixed;
+  /* position: fixed; */
   bottom: 0px;
   left: 0px;
   width: 100%;

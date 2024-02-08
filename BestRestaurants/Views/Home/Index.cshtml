@@ -3,51 +3,56 @@
   Layout = "_Layout";
 }
 @using BestRestaurants.Models;
-<hr />
-<p class="text-center">Come explore restaurants in Portland submitted by users and add your own. Leave a review!</p>
-
-<h4>Cuisines</h4>
-@if (Model["cuisines"].Length == 0)
-{
-  <p>No cuisines have been added yet!</p>
-}
-else
-{
-  <ul>
-  @foreach (Cuisine cuisine in Model["cuisines"])
-  {
-    <li>@Html.ActionLink(@cuisine.Name, "Details", "Cuisines", new { id = @cuisine.CuisineId })</li>
-  }
-  </ul>
-<hr />
-  <h4>Restaurants</h4>
-  @if (Model["restaurants"].Length == 0)
-  {
-    <p>No restaurants have been added yet!</p>
-  }
-  else
-  {
-    <ul>
-      @foreach (Restaurant restaurant in Model["restaurants"])
+<div class="container">
+  <p class="text-center">Come explore restaurants in Portland submitted by users and add your own. Leave a review!</p>
+  <div class="row" >
+    <div class="col-sm" id="splashCard">
+      <h4 class="text-center">Cuisines</h4>
+      @if (Model["cuisines"].Length == 0)
       {
-        <li>@Html.ActionLink(@restaurant.Name, "Details", "Restaurants", new { id = @restaurant.RestaurantId })</li>
+        <p>No cuisines have been added yet!</p>
       }
-    </ul>
-  }
-<hr />
-    <h4>Services</h4>
-    @if (Model["services"].Length == 0)
-    {
-      <p>No services have been added yet!</p>
-    }
-    else
-    {
-      <ul>
-        @foreach (Service service in Model["services"])
-        {
-          <li>@Html.ActionLink(@service.Type, "Details", "Services", new { id = @service.ServiceId })</li>
-        }
-      </ul>
-    }
-
-}
+      else
+      {
+        <ul>
+          @foreach (Cuisine cuisine in Model["cuisines"])
+          {
+            <li>@Html.ActionLink(@cuisine.Name, "Details", "Cuisines", new { id = @cuisine.CuisineId })</li>
+          }
+        </ul>
+      }
+      </div>
+    <div class="col-sm" id="splashCard">
+      <h4 class="text-center">Restaurants</h4>
+          @if (Model["restaurants"].Length == 0)
+          {
+          <p>No restaurants have been added yet!</p>
+          }
+          else
+          {
+          <ul>
+              @foreach (Restaurant restaurant in Model["restaurants"])
+              {
+              <li>@Html.ActionLink(@restaurant.Name, "Details", "Restaurants", new { id = @restaurant.RestaurantId })</li>
+              }
+          </ul>
+          }
+      </div>
+    <div class="col-sm" id="splashCard">
+      <h4 class="text-center">Services</h4>
+          @if (Model["services"].Length == 0)
+          {
+          <p>No services have been added yet!</p>
+          }
+          else
+          {
+          <ul>
+              @foreach (Service service in Model["services"])
+              {
+              <li>@Html.ActionLink(@service.Type, "Details", "Services", new { id = @service.ServiceId })</li>
+              }
+          </ul>
+          }
+      </div>
+  </div>
+</div>
