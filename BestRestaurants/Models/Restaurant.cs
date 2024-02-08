@@ -13,4 +13,5 @@ public class Restaurant
   public int CuisineId { get; set; }
   public List<Review> Reviews { get; set; }
   public List<RestaurantService> JoinEntities { get; }
+  public List<DayRestaurant> JoinEntity { get; }
 }

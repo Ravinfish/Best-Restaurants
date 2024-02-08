@@ -8,4 +8,5 @@ public class Day
   public string Name { get; set;}
   string Time { get; set; }
   public List<DayService> JoinEntities { get;}
+  public List<DayRestaurant> JoinEntity { get; }
 }

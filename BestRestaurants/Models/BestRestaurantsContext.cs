@@ -11,6 +11,8 @@ public class BestRestaurantsContext : DbContext
   public DbSet<RestaurantService> RestaurantServices { get; set; }
   public DbSet<Day> Days { get; set; }
   public DbSet<DayService> DayServices { get; set; }
+  public DbSet<DayRestaurant> DayRestaurants { get; set; }
+
   public BestRestaurantsContext(DbContextOptions options) : base(options) { }
 
   protected override void OnModelCreating(ModelBuilder builder)
