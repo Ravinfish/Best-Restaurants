@@ -27,6 +27,8 @@ namespace BestRestaurants.Controllers
       Service thisService = _db.Services
         .Include(service => service.JoinEntities)
         .ThenInclude(join => join.Restaurant)
+        .Include(service => service.JoinEntity)
+        .ThenInclude(join => join.Day)
         .FirstOrDefault(service => service.ServiceId == id);
       return View(thisService);
     }
@@ -86,7 +88,7 @@ namespace BestRestaurants.Controllers
       }
       else
       {
-       return RedirectToAction("Index", "Home");
+        return RedirectToAction("Index", "Home");
       }
     }
   }

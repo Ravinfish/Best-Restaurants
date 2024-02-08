@@ -29,6 +29,23 @@ else
   </ul>
 }
 <hr />
+<!-- ///////////////////////////////////////////// -->
+@if(@Model.JoinEntity.Count == 0 || @Model.JoinEntity == null)
+{
+  <p>This service has no days attached yet</p>
+}
+else
+{
+  <h4>This service has the following days: </h4>
+  <ul>
+  @foreach(DayService join in Model.JoinEntity)
+  {
+    <li>Day: @join.Day.Name</li>
+  }
+  </ul>
+}
+<!-- ///////////////////////////////////// -->
+
 
 <p>@Html.ActionLink("Add a Restaurant", "AddRestaurant", new { id = Model.ServiceId })</p>
 
