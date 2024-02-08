@@ -1,0 +1,22 @@
+@{
+  Layout = "_Layout";
+}
+@model BestRestaurants.Models.Service
+
+<h2>Add a Day</h2>
+<h4>Choose days to add to @Html.DisplayFor(model => model.Type)</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.ServiceId)
+
+  @Html.Label("Select days")
+  @foreach (var day in ViewBag.Days as List<BestRestaurants.Models.Day>)
+  {
+    <div>
+      <input type="checkbox" id="@("DayId_" + day.DayId)" name="DayIds" value="@day.DayId" />
+      <label for="@("DayId_" + day.DayId)">@day.Name</label>
+    </div>
+  }
+  <input type="submit" value="Add" />
+}

@@ -39,9 +39,9 @@ namespace BestRestaurants.Controllers
     [HttpPost]
     public ActionResult AddRestaurant(Service service, int restaurantId)
     {
-      #nullable enable
+#nullable enable
       RestaurantService? joinEntity = _db.RestaurantServices.FirstOrDefault(join => (join.RestaurantId == restaurantId && join.ServiceId == service.ServiceId));
-      #nullable disable
+#nullable disable
       if (joinEntity == null && restaurantId != 0)
       {
         _db.RestaurantServices.Add(new RestaurantService() { RestaurantId = restaurantId, ServiceId = service.ServiceId });
@@ -56,6 +56,38 @@ namespace BestRestaurants.Controllers
       _db.RestaurantServices.Remove(joinEntry);
       _db.SaveChanges();
       return RedirectToAction("Index");
+    }
+
+    public ActionResult AddDay(int id)
+    {
+      Service thisService = _db.Services.FirstOrDefault(services => services.ServiceId == id);
+      List<Day> days = _db.Days.ToList();
+      ViewBag.Days = days;
+      return View(thisService);
+    }
+
+    [HttpPost]
+    public ActionResult AddDay(Service service, int[] dayIds)
+    {
+      if (dayIds != null && dayIds.Length > 0)
+      {
+        foreach (var dayId in dayIds)
+        {
+#nullable enable
+          DayService? joinEntity = _db.DayServices.FirstOrDefault(join => join.DayId == dayId && join.ServiceId == service.ServiceId);
+#nullable disable
+          if (joinEntity == null)
+          {
+            _db.DayServices.Add(new DayService() { DayId = dayId, ServiceId = service.ServiceId });
+          }
+          _db.SaveChanges();
+        }
+        return RedirectToAction("Details", new { id = service.ServiceId });
+      }
+      else
+      {
+       return RedirectToAction("Index", "Home");
+      }
     }
   }
 }
