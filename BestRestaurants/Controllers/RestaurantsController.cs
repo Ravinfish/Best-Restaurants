@@ -39,13 +39,7 @@ namespace BestRestaurants.Controllers
       return View(resultList);
     }
 
-    //old index before search bar
-    // public ActionResult Index()
-    // {
-    //   List<Restaurant> model = _db.Restaurants.Include(restaurant => restaurant.Cuisine).ToList();
-    //   ViewBag.PageTitle = "View All Items";
-    //   return View(model);
-    // }
+
     public ActionResult Create()
     {
       ViewBag.CuisineId = new SelectList(_db.Cuisines, "CuisineId", "Name");
@@ -148,30 +142,29 @@ namespace BestRestaurants.Controllers
     public ActionResult AddDay(int id)
     {
       Restaurant thisRestaurant = _db.Restaurants.FirstOrDefault(restaurants => restaurants.RestaurantId == id);
-      ViewBag.DayId = new SelectList(_db.Days, "DayId", "Name");
+
       return View(thisRestaurant);
     }
     [HttpPost]
-    public ActionResult AddDay(Restaurant restaurant, int dayId, string time)
+    public ActionResult AddDay(Restaurant restaurant, string time, string name)
     {
+      Day day = new Day
+      {
+        Name = name,
+        Time = time
+      };
+      _db.Days.Add(day);
+      _db.SaveChanges();
+      int dayId = day.DayId;
       #nullable enable
       DayRestaurant? joinEntity = _db.DayRestaurants.FirstOrDefault(join => (join.DayId == dayId && join.RestaurantId == restaurant.RestaurantId));
       #nullable disable
       if (joinEntity == null & dayId != 0)
       {
         _db.DayRestaurants.Add(new DayRestaurant() { DayId = dayId, RestaurantId = restaurant.RestaurantId });
-
-        Day day = _db.Days.FirstOrDefault(day => day.DayId == dayId);
-        if (day!= null)
-        {
-          day.Time = time;
-        }
-        
         _db.SaveChanges();
       }
       return RedirectToAction("Details", new { id = restaurant.RestaurantId });
     }
-
   }
 }
-
